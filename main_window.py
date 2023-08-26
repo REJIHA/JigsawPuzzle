@@ -12,67 +12,77 @@ from tkinter import *
 window = Tk()                               # make window from tkinter
 scr_width = window.winfo_screenwidth()      # user's current screen width in pixels
 scr_height = window.winfo_screenheight()    # user's current screen height in pixels
+RELX_MIDDLE = 0.5                           # float value to place elements in middle of coordinates
 ai_level = int(1)                           # integer value of level; user can change level
 is_fullscreen = False                       # boolean whether current window is full screened
 
-
-# make a gui window using tkinter geometry; window size depends on user's screen size
+"""
+make a gui window using tkinter geometry; window size depends on user's screen size
+"""
 def initialize():
     # window.geometry("650x650")
     window.geometry(f'{int(scr_width/1.6)}x{int(scr_height/1.3)}')
     window.resizable(width=False, height=False)
     window.title("Jigsaw Puzzle It")
 
-# main lobby of the game that displays buttons that user can click
-def main_lobby():
+"""
+main lobby of the game that displays options that user can use by clicking
+"""
+def main_lobby_window():
     # window.update_idletasks()
     # win_width = window.winfo_width()
     # win_height = window.winfo_height()
-    Label(window, text="Jigsaw Puzzle It", fg='white', bg='blue').place(relx=0.5, rely=0.1, anchor=CENTER)
-    Button(window, text="PLAY").place(relx=0.5, rely=0.25, anchor=CENTER)
-    Label(window, text="CURRENT LEVEL: "+str(ai_level)).place(relx=0.5, rely=0.35, anchor=CENTER)
-    Button(window, text="SELECT LEVEL", command=select_level_window).place(relx=0.5, rely=0.4, anchor=CENTER)
-    Button(window, text="SETTING", command=setting_window).place(relx=0.5, rely=0.5, anchor=CENTER)
-    Button(window, text="QUIT", command=window.destroy).place(relx=0.5, rely=0.6, anchor=CENTER)
+    Label(window, text="Jigsaw Puzzle It", fg='white', bg='blue').place(relx=RELX_MIDDLE, rely=0.1, anchor=CENTER)
+    Button(window, text="PLAY").place(relx=RELX_MIDDLE, rely=0.25, anchor=CENTER)
+    Label(window, text="CURRENT LEVEL: "+str(ai_level)).place(relx=RELX_MIDDLE, rely=0.35, anchor=CENTER)
+    Button(window, text="SELECT LEVEL", command=select_level_window).place(relx=RELX_MIDDLE, rely=0.4, anchor=CENTER)
+    Button(window, text="SETTING", command=setting_window).place(relx=RELX_MIDDLE, rely=0.5, anchor=CENTER)
+    Button(window, text="QUIT", command=window.destroy).place(relx=RELX_MIDDLE, rely=0.6, anchor=CENTER)
 
-# when "SELECT LEVEL" button is clicked, this level selection window opens
+"""
+when "SELECT LEVEL" button is clicked, this level selection window opens
+"""
 def select_level_window():
-    lev_size = int(400)
+    LEV_SIZE = int(400)
     level_win = Toplevel(window)
-    level_win.geometry(str(lev_size)+"x"+str(lev_size))
+    level_win.geometry(str(LEV_SIZE)+"x"+str(LEV_SIZE))
     level_win.resizable(width=False, height=False)
     level_win.title("Level Select")
     level_win.grab_set()
 
     # open the level selection window in the middle of the screen
-    x_coordinate = int((scr_width/2) - (lev_size/2))
-    y_coordinate = int((scr_height/2) - (lev_size/2))
-    level_win.geometry("{}x{}+{}+{}".format(lev_size, lev_size, x_coordinate, y_coordinate))
+    x_coordinate = int((scr_width/2) - (LEV_SIZE/2))
+    y_coordinate = int((scr_height/2) - (LEV_SIZE/2))
+    level_win.geometry("{}x{}+{}+{}".format(LEV_SIZE, LEV_SIZE, x_coordinate, y_coordinate))
 
     # setting window design
-    Label(level_win, text='SELECT LEVEL', fg='white', bg='green').place(relx=0.5, rely=0.1, anchor=CENTER)
+    Label(level_win, text='SELECT LEVEL', fg='white', bg='green').place(relx=RELX_MIDDLE, rely=0.1, anchor=CENTER)
 
-# when "SETTING" button is clicked, this setting window opens. while it's open,
-# user cannot interact with main lobby window
+""""
+when "SETTING" button is clicked, this setting window opens. while it's open,
+user cannot interact with main lobby window
+"""
 def setting_window():
     # create setting window
-    sett_size = int(300)
+    SETT_SIZE = int(300)
     setting_win = Toplevel(window)
-    setting_win.geometry(str(sett_size)+"x"+str(sett_size))
+    setting_win.geometry(str(SETT_SIZE)+"x"+str(SETT_SIZE))
     setting_win.resizable(width=False, height=False)
     setting_win.title("Setting")
     setting_win.grab_set()
 
     # open the setting window in the middle of the screen
-    x_coordinate = int((scr_width/2) - (sett_size/2))
-    y_coordinate = int((scr_height/2) - (sett_size/2))
-    setting_win.geometry("{}x{}+{}+{}".format(sett_size, sett_size, x_coordinate, y_coordinate))
+    x_coordinate = int((scr_width/2) - (SETT_SIZE/2))
+    y_coordinate = int((scr_height/2) - (SETT_SIZE/2))
+    setting_win.geometry("{}x{}+{}+{}".format(SETT_SIZE, SETT_SIZE, x_coordinate, y_coordinate))
 
     # setting window design
-    Label(setting_win, text='SETTING', fg='white', bg='orange').place(relx=0.5, rely=0.1, anchor=CENTER)
-    resize_butt = Button(setting_win, text="FULLSCREEN", command=change_win_size).place(relx=0.5, rely=0.25, anchor=CENTER)
+    Label(setting_win, text='SETTING', fg='white', bg='orange').place(relx=RELX_MIDDLE, rely=0.1, anchor=CENTER)
+    resize_butt = Button(setting_win, text="FULLSCREEN", command=change_win_size).place(relx=RELX_MIDDLE, rely=0.25, anchor=CENTER)
 
-# TODO:change button text upon click
+"""
+TODO:change button text upon click
+"""
 def change_win_size():
     global is_fullscreen    
     if is_fullscreen==False:
@@ -87,8 +97,7 @@ def change_win_size():
 def main():
     # window = tk.Tk()
     initialize()
-    main_lobby()
-
+    main_lobby_window()
 
     window.mainloop()
 
