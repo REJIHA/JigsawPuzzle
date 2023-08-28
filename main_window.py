@@ -7,44 +7,46 @@ DESCRIPTION: This program allows user to upload their image, or image provided a
             slicing in smaller pieces) to their like.
 """
 from genericpath import isfile
-from tkinter import *
+import tkinter as tk
+# from playsound import playsound
+import pygame
 
-window = Tk()                               # make window from tkinter
+window = tk.Tk()                            # make window from tkinter
 scr_width = window.winfo_screenwidth()      # user's current screen width in pixels
 scr_height = window.winfo_screenheight()    # user's current screen height in pixels
 RELX_MIDDLE = 0.5                           # float value to place elements in middle of coordinates
-ai_level = int(1)                           # integer value of level; user can change level
+curr_level = int(1)                         # integer value of level; user can change level
 is_fullscreen = False                       # boolean whether current window is full screened
+
 
 """
 make a gui window using tkinter geometry; window size depends on user's screen size
 """
 def initialize():
-    # window.geometry("650x650")
     window.geometry(f'{int(scr_width/1.6)}x{int(scr_height/1.3)}')
     window.resizable(width=False, height=False)
     window.title("Jigsaw Puzzle It")
+# TODO: play music using pygame module
+    # bkgd_music = pygame.mixer.Sound("jigsaw puzzle\resources\music")
+    # pygame.mixer.Sound.play(bkgd_music)
 
 """
 main lobby of the game that displays options that user can use by clicking
 """
 def main_lobby_window():
-    # window.update_idletasks()
-    # win_width = window.winfo_width()
-    # win_height = window.winfo_height()
-    Label(window, text="Jigsaw Puzzle It", fg='white', bg='blue').place(relx=RELX_MIDDLE, rely=0.1, anchor=CENTER)
-    Button(window, text="PLAY").place(relx=RELX_MIDDLE, rely=0.25, anchor=CENTER)
-    Label(window, text="CURRENT LEVEL: "+str(ai_level)).place(relx=RELX_MIDDLE, rely=0.35, anchor=CENTER)
-    Button(window, text="SELECT LEVEL", command=select_level_window).place(relx=RELX_MIDDLE, rely=0.4, anchor=CENTER)
-    Button(window, text="SETTING", command=setting_window).place(relx=RELX_MIDDLE, rely=0.5, anchor=CENTER)
-    Button(window, text="QUIT", command=window.destroy).place(relx=RELX_MIDDLE, rely=0.6, anchor=CENTER)
+    tk.Label(window, text="Jigsaw Puzzle It", fg='white', bg='blue').place(relx=RELX_MIDDLE, rely=0.1, anchor=tk.CENTER)
+    tk.Button(window, text="PLAY").place(relx=RELX_MIDDLE, rely=0.25, anchor=tk.CENTER)
+    tk.Label(window, text="CURRENT LEVEL: "+str(curr_level)).place(relx=RELX_MIDDLE, rely=0.35, anchor=tk.CENTER)
+    tk.Button(window, text="SELECT LEVEL", command=select_level_window).place(relx=RELX_MIDDLE, rely=0.4, anchor=tk.CENTER)
+    tk.Button(window, text="SETTING", command=setting_window).place(relx=RELX_MIDDLE, rely=0.5, anchor=tk.CENTER)
+    tk.Button(window, text="QUIT", command=window.destroy).place(relx=RELX_MIDDLE, rely=0.6, anchor=tk.CENTER)
 
 """
 when "SELECT LEVEL" button is clicked, this level selection window opens
 """
 def select_level_window():
     LEV_SIZE = int(400)
-    level_win = Toplevel(window)
+    level_win = tk.Toplevel(window)
     level_win.geometry(str(LEV_SIZE)+"x"+str(LEV_SIZE))
     level_win.resizable(width=False, height=False)
     level_win.title("Level Select")
@@ -56,7 +58,7 @@ def select_level_window():
     level_win.geometry("{}x{}+{}+{}".format(LEV_SIZE, LEV_SIZE, x_coordinate, y_coordinate))
 
     # setting window design
-    Label(level_win, text='SELECT LEVEL', fg='white', bg='green').place(relx=RELX_MIDDLE, rely=0.1, anchor=CENTER)
+    tk.Label(level_win, text='SELECT LEVEL', fg='white', bg='green').place(relx=RELX_MIDDLE, rely=0.1, anchor=tk.CENTER)
 
 """"
 when "SETTING" button is clicked, this setting window opens. while it's open,
@@ -65,7 +67,7 @@ user cannot interact with main lobby window
 def setting_window():
     # create setting window
     SETT_SIZE = int(300)
-    setting_win = Toplevel(window)
+    setting_win = tk.Toplevel(window)
     setting_win.geometry(str(SETT_SIZE)+"x"+str(SETT_SIZE))
     setting_win.resizable(width=False, height=False)
     setting_win.title("Setting")
@@ -77,25 +79,23 @@ def setting_window():
     setting_win.geometry("{}x{}+{}+{}".format(SETT_SIZE, SETT_SIZE, x_coordinate, y_coordinate))
 
     # setting window design
-    Label(setting_win, text='SETTING', fg='white', bg='orange').place(relx=RELX_MIDDLE, rely=0.1, anchor=CENTER)
-    resize_butt = Button(setting_win, text="FULLSCREEN", command=change_win_size).place(relx=RELX_MIDDLE, rely=0.25, anchor=CENTER)
+    tk.Label(setting_win, text='SETTING', fg='white', bg='orange').place(relx=RELX_MIDDLE, rely=0.1, anchor=tk.CENTER)
+    tk.Button(setting_win, text="CHANGE SCREEN SIZE", command=change_win_size).place(relx=RELX_MIDDLE, rely=0.25, anchor=tk.CENTER)
 
 """
-TODO:change button text upon click
+when user clicks this button, it changes screen size from windowed to full screen, and vice versa
 """
 def change_win_size():
-    global is_fullscreen    
+    global is_fullscreen
     if is_fullscreen==False:
         window.attributes('-fullscreen', True)
         is_fullscreen = True
-        # resize_butt['text'] = 'WINDOWED'
     else:
         window.attributes('-fullscreen', False)
         is_fullscreen = False
-        # resize_butt['text'] = 'FULLSCREEN'
+
 
 def main():
-    # window = tk.Tk()
     initialize()
     main_lobby_window()
 
