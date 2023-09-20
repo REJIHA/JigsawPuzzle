@@ -27,8 +27,9 @@ def initialize():
     window.resizable(width=False, height=False)
     window.title("Jigsaw Puzzle It")
 # TODO: play music using pygame module
-    # bkgd_music = pygame.mixer.Sound("jigsaw puzzle\resources\music")
-    # pygame.mixer.Sound.play(bkgd_music)
+    pygame.init()               # initialize pygame module for sound
+    bkgd_music = pygame.mixer.Sound(r"jigsaw puzzle\resources\music\just-relax-11157.mp3")
+    bkgd_music.play()
 
 """
 main lobby of the game that displays options that user can use by clicking
@@ -81,6 +82,7 @@ def setting_window():
     # setting window design
     tk.Label(setting_win, text='SETTING', fg='white', bg='orange').place(relx=RELX_MIDDLE, rely=0.1, anchor=tk.CENTER)
     tk.Button(setting_win, text="CHANGE SCREEN SIZE", command=change_win_size).place(relx=RELX_MIDDLE, rely=0.25, anchor=tk.CENTER)
+    tk.Label(setting_win, text='Click Again to Revert').place(relx=RELX_MIDDLE, rely=0.325, anchor=tk.CENTER)
 
 """
 when user clicks this button, it changes screen size from windowed to full screen, and vice versa
@@ -96,9 +98,9 @@ def change_win_size():
 
 
 def main():
-    initialize()
-    main_lobby_window()
+    initialize()                # initialize window using TKinter module
+    main_lobby_window()         # put TKinter elements inside for interactivity
 
-    window.mainloop()
+    window.mainloop()           # continue execution until quit or close
 
 main()

@@ -33,6 +33,7 @@ Date: August 23 2023 - ? 2023
 ## :open_file_folder: Included files
 
 * (will be added later) images to solve jigsaw
+* musics & sound effects?
 
 ## :shamrock: Links Used to Implement
 * [readme emoji cheatsheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md)
