@@ -12,7 +12,7 @@ Date: August 23 2023 - ? 2023
 **Environment**
 * OS: Windows
 * Language: Python
-* Tools Used: TKinter
+* Tools Used: TKinter, pygame
 * IDE: Visual Studio Code
 
 ## :mushroom: How to Play
@@ -26,7 +26,7 @@ Date: August 23 2023 - ? 2023
 - [ ] select level - choose level of difficulty
 - [ ] setting - change window size, volume setting...
 - [x] quit - exit game
-- [ ] initially set each features, and make them prettier
+- [ ] make UI prettier
 
 
 
@@ -36,5 +36,6 @@ Date: August 23 2023 - ? 2023
 * musics & sound effects?
 
 ## :shamrock: Links Used to Implement
-* [readme emoji cheatsheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md)
+* [Readme Emoji Cheatsheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md)
 * [Create Executable Python](https://datatofish.com/executable-pyinstaller/)
+* [Pygame Mixer Documentation](https://www.pygame.org/docs/ref/mixer.html)
